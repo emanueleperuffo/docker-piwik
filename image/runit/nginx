@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+
+sed "s|stats.example.com|$PIWIK_DOMAIN|" /etc/nginx/sites-available/stats.example.com.conf > /etc/nginx/sites-enabled/stats.conf
+sed -i "s|valid_referers none blocked.*|valid_referers none blocked $PIWIK_DOMAIN|" > /etc/nginx/apps/piwik/piwik.conf
+
+exec nginx -g "daemon off;"
